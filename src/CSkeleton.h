@@ -3,6 +3,7 @@
 // Includes
 #include "CApp.h"
 #include <CpperoMQ/All.hpp>
+#include <json.hpp>
 
 class CSkeleton : public CApp
 {
@@ -21,6 +22,7 @@ private:
 	
 	CpperoMQ::Context 		m_context;
 	CpperoMQ::PublishSocket	m_appPublisher;
+	CpperoMQ::SubscribeSocket	m_appSubscriber;
 	
 	// Methods
 	void Initialize();
@@ -29,4 +31,7 @@ private:
 
 	void Shutdown();
 	void Restart();
+	
+	void SendCommand( const std::string &commandIn );
+	void SendChCommand( const std::string &commandIn, const nlohmann::json &valueIn );
 };
